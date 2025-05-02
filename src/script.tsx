@@ -51,11 +51,12 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
 })
 
 // --- Objects Setup ---
+
+const donutGeometry = new THREE.TorusGeometry(0.3, 0.15, 20, 40)
+const donutMaterial = new THREE.MeshMatcapMaterial({ matcap: textMatcapTexture})
+
 for (let i = 0; i < 100; i++) {
-    const donut = new THREE.Mesh(
-        new THREE.TorusGeometry(0.3, 0.15, 20, 40),
-        new THREE.MeshMatcapMaterial({ matcap: textMatcapTexture})
-    )
+    const donut = new THREE.Mesh(donutGeometry, donutMaterial)
     donut.position.x = (Math.random() - 0.5) * 10
     donut.position.y = (Math.random() - 0.5) * 10
     donut.position.z = (Math.random() - 0.5) * 10
