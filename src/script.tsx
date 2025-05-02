@@ -22,7 +22,23 @@ const textureLoader = new THREE.TextureLoader()
 const fontLoader = new FontLoader()
 
 fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
-    
+    const textGeometry = new TextGeometry('Amelia', {
+        font: font,
+        size: 2,
+        height: 1,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 0.03,
+        bevelSize: 0.02,
+        bevelOffset: 0,
+        bevelSegments: 5
+    })
+    const textMaterial = new THREE.MeshBasicMaterial({
+        wireframe: true
+     })
+    const text = new THREE.Mesh(textGeometry, textMaterial)
+    textGeometry.center() 
+    scene.add(text)
 })
 
 // --- Camera Setup ---
