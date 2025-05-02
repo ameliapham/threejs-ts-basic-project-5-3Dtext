@@ -12,11 +12,12 @@ const canvas = document.querySelector("canvas.webgl") as HTMLCanvasElement;
 const scene = new THREE.Scene();
 
 // --- Setup Axes Helper ---
-const axesHelper = new THREE.AxesHelper(2)
-scene.add(axesHelper)
+//const axesHelper = new THREE.AxesHelper(2)
+//scene.add(axesHelper)
 
 // --- Textures ---
-const textureLoader = new THREE.TextureLoader()
+const matcapTexture = new THREE.TextureLoader().load('textures/matcaps/2.png')
+matcapTexture.colorSpace = THREE.SRGBColorSpace
 
 // --- Fonts ---
 const fontLoader = new FontLoader()
@@ -33,8 +34,8 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
         bevelOffset: 0,
         bevelSegments: 5
     })
-    const textMaterial = new THREE.MeshBasicMaterial({
-        wireframe: true
+    const textMaterial = new THREE.MeshMatcapMaterial({
+        matcap: matcapTexture
      })
     const text = new THREE.Mesh(textGeometry, textMaterial)
     textGeometry.center() 
