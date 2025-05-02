@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 
 console.log("Hello, Three.js with TypeScript!");
 
@@ -12,6 +14,16 @@ const scene = new THREE.Scene();
 // --- Setup Axes Helper ---
 const axesHelper = new THREE.AxesHelper(2)
 scene.add(axesHelper)
+
+// --- Textures ---
+const textureLoader = new THREE.TextureLoader()
+
+// --- Fonts ---
+const fontLoader = new FontLoader()
+
+fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
+    
+})
 
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
