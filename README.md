@@ -1,11 +1,32 @@
-# Threejs + TypeScript + Vite
+#Three.js + TypeScript + Vite Project
 
-A minimal setup [THREE.js](https://threejs.org/) project in [TypeScript](https://www.typescriptlang.org/) with [Vite](https://vitejs.dev/).
+My basic practice project uses **Three.js** with **TypeScript** and **Vite**.  
+The focus is on learning how to create a custom **3DText**
 
-## Getting started
+## Key Features
+- Custom 3D Text creation
+- Modern development setup with Vite & TypeScript
 
-Install dependencies.
-`yarn`
+## Getting Started
 
-Start development server.
+### Prerequisites
+- Node.js ≥18.0.0
+- Yarn package manager
+
+### Installation  
+`yarn install`
+
+### Development  
 `yarn dev`
+
+### Build for Production  
+`yarn build`
+
+## Technical Stack
+- Three.js
+- TypeScript
+- Vite
+- dat.GUI
+
+## Learning Resources
+- [Three.js Documentation](https://threejs.org/docs/)
