@@ -15,9 +15,17 @@ const scene = new THREE.Scene();
 //const axesHelper = new THREE.AxesHelper(2)
 //scene.add(axesHelper)
 
-// --- Textures ---
-const matcapTexture = new THREE.TextureLoader().load('textures/matcaps/2.png')
-matcapTexture.colorSpace = THREE.SRGBColorSpace
+// --- Texture Loader ---
+const textureLoader = new THREE.TextureLoader
+
+// --- Load matcap texture ---
+const matcapTextures = ["rose.png", "salmon.png"].map(filename => {
+    const texture = textureLoader.load(`textures/matcaps/${filename}`)
+    texture.colorSpace = THREE.SRGBColorSpace
+    return texture
+})
+
+const [ objectMatcapTexture, textMatcapTexture] = matcapTextures
 
 // --- Fonts ---
 const fontLoader = new FontLoader()
@@ -35,12 +43,32 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
         bevelSegments: 5
     })
     const textMaterial = new THREE.MeshMatcapMaterial({
-        matcap: matcapTexture
+        matcap: textMatcapTexture
      })
     const text = new THREE.Mesh(textGeometry, textMaterial)
     textGeometry.center() 
     scene.add(text)
 })
+
+// --- Objects Setup ---
+for (let i = 0; i < 100; i++) {
+    const donut = new THREE.Mesh(
+        new THREE.TorusGeometry(0.3, 0.15, 20, 40),
+        new THREE.MeshMatcapMaterial({ matcap: textMatcapTexture})
+    )
+    donut.position.x = (Math.random() - 0.5) * 10
+    donut.position.y = (Math.random() - 0.5) * 10
+    donut.position.z = (Math.random() - 0.5) * 10
+
+    donut.rotation.x = Math.random() * Math.PI
+    donut.rotation.y = Math.random() * Math.PI
+
+    const scale = Math.random()
+    donut.scale.set(scale, scale, scale)
+
+
+    scene.add(donut)
+}
 
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
