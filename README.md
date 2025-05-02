@@ -1,4 +1,4 @@
-#Three.js + TypeScript + Vite Project
+# Three.js + TypeScript + Vite Project
 
 My basic practice project uses **Three.js** with **TypeScript** and **Vite**.  
 The focus is on learning how to create a custom **3DText**
