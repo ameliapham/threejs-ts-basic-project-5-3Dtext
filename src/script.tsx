@@ -42,39 +42,58 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
         bevelOffset: 0,
         bevelSegments: 5
     })
-    textGeometry.center() 
+
+    textGeometry.center()
+    textGeometry.computeBoundingBox()
+
+    const boundingBox = textGeometry.boundingBox // Box3
 
     const textMaterial = new THREE.MeshMatcapMaterial({
         matcap: textMatcapTexture
      })
     const text = new THREE.Mesh(textGeometry, textMaterial)
     scene.add(text)
+
+    // --- Objects Setup ---
+    const donutGeometry = new THREE.TorusGeometry(0.3, 0.15, 20, 40)
+    const donutMaterial = new THREE.MeshMatcapMaterial({ matcap: textMatcapTexture })
+
+    function isOutsideTextBox(x: number, y: number, z: number): boolean {
+        const padding = 1.5 // safe distance around text
+        return (
+            x < boundingBox!.min.x - padding || x > boundingBox!.max.x + padding ||
+            y < boundingBox!.min.y - padding || y > boundingBox!.max.y + padding ||
+            z < boundingBox!.min.z - padding || z > boundingBox!.max.z + padding
+        )
+    }
+
+    let donutsCreated = 0
+    const targetCount = 500
+
+    while (donutsCreated < targetCount) {
+        const x = (Math.random() - 0.5) * 20
+        const y = (Math.random() - 0.5) * 20
+        const z = (Math.random() - 0.5) * 20
+
+        if (isOutsideTextBox(x, y, z)) {
+            const donut = new THREE.Mesh(donutGeometry, donutMaterial)
+            donut.position.set(x, y, z)
+
+            donut.rotation.x = Math.random() * Math.PI
+            donut.rotation.y = Math.random() * Math.PI
+
+            const scale = Math.random()
+            donut.scale.set(scale, scale, scale)
+
+            scene.add(donut)
+            donutsCreated++
+        }
+    }
 })
-
-// --- Objects Setup ---
-
-const donutGeometry = new THREE.TorusGeometry(0.3, 0.15, 20, 40)
-const donutMaterial = new THREE.MeshMatcapMaterial({ matcap: textMatcapTexture})
-
-for (let i = 0; i < 500; i++) {
-    const donut = new THREE.Mesh(donutGeometry, donutMaterial)
-    donut.position.x = (Math.random() - 0.5) * 18
-    donut.position.y = (Math.random() - 0.5) * 18
-    donut.position.z = (Math.random() - 0.5) * 18
-
-    donut.rotation.x = Math.random() * Math.PI
-    donut.rotation.y = Math.random() * Math.PI
-
-    const scale = Math.random()
-    donut.scale.set(scale, scale, scale)
-
-
-    scene.add(donut)
-}
 
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(100,window.innerWidth / window.innerHeight, 1, 1000);
-camera.position.z = 4
+camera.position.z = 5
 camera.position.x = -1
 scene.add(camera)
 
