@@ -5,6 +5,8 @@
 My basic practice project uses **Three.js** with **TypeScript** and **Vite**.  
 The focus is on learning how to create a custom **3DText**
 
+**Live Demo:** [Experience it here](https://ap-3d-text.vercel.app/)
+
 ## Key Features
 - Custom 3D Text creation
 - Bounding Box
