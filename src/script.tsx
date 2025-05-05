@@ -54,7 +54,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
     const text = new THREE.Mesh(textGeometry, textMaterial)
     scene.add(text)
 
-    // --- Objects Setup ---
+    // --- Donuts ---
     const donutGeometry = new THREE.TorusGeometry(0.3, 0.15, 20, 40)
     const donutMaterial = new THREE.MeshMatcapMaterial({ matcap: textMatcapTexture })
 
@@ -92,7 +92,7 @@ fontLoader.load('fonts/helvetiker_regular.typeface.json', (font) => {
 })
 
 // --- Camera Setup ---
-const camera = new THREE.PerspectiveCamera(100,window.innerWidth / window.innerHeight, 1, 1000);
+const camera = new THREE.PerspectiveCamera(100,window.innerWidth / window.innerHeight, 0.001, 1000);
 camera.position.z = 5
 camera.position.x = -1
 scene.add(camera)
